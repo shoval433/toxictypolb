@@ -48,13 +48,24 @@ pipeline{
                     }
                     sh "cd src/test && docker-compose up -d"
                     echo "======================================================================================================================================================================"
-                    // res = sh ( script: "docker logs test_tester_1 | grep -i 399",
-                    // returnStdout: true)
-                    // echo "${res}"
-                    // sh "docker run -d --name app --network ubuntu_default -p 8083:8080 toxictypoapp:1.0-SNAPSHOT "
-                    
-                    // sh "docker build -t testing-img ./src/test/" 
-                    // sh "docker run --rm --name testing --network ubuntu_default testing-img"
+                    def res = sh ( script: "docker logs test_tester_1 | grep -i Failed",
+                    returnStdout: true) == 0
+                    echo "${res}"
+
+
+                    // Server is set to app:8081
+                    // Test level is set to e2e
+                    // Wait time is set to 7
+                    // Waiting 7 seconds before starting to send test messages...
+                    // Traceback (most recent call last):
+                    //   File "e2e_test.py", line 68, in <module>
+                    //     results = pool.map(ptest, testCases)
+                    //   File "/usr/local/lib/python2.7/multiprocessing/pool.py", line 253, in map
+                    //     return self.map_async(func, iterable, chunksize).get()
+                    //   File "/usr/local/lib/python2.7/multiprocessing/pool.py", line 572, in get
+                    //     raise self._value
+                    // requests.exceptions.ConnectionError: HTTPConnectionPool(host='app', port=8081): Max retries exceeded with url: /api/suggest/accuseomed (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fecebccee10>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
                 }
             }
         }
