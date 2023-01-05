@@ -53,7 +53,7 @@ pipeline{
                     docker-compose up --build tester
 
                     check=0
-                    docker logs test-tester-1 | grep -i failures || { check=1; }
+                    docker logs tester | grep -i failures || { check=1; }
 
                     if [ \$check = 0 ] 
                     then
