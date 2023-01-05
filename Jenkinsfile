@@ -46,9 +46,11 @@ pipeline{
                     configFileProvider([configFile(fileId: 'my_settings.xml', variable: 'set')]) {
                     sh "mvn -s ${set} verify"
                     }
-                    echo "======================================================================================================================================================================"
                     sh "cd src/test && docker-compose up -d"
-                    
+                    echo "======================================================================================================================================================================"
+                    res = sh ( script: "docker logs test_tester_1",
+                    returnStdout: true)
+                    println(res)
                     // sh "docker run -d --name app --network ubuntu_default -p 8083:8080 toxictypoapp:1.0-SNAPSHOT "
                     
                     // sh "docker build -t testing-img ./src/test/" 
