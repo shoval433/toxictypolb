@@ -50,7 +50,7 @@ pipeline{
                     echo "======================================================================================================================================================================"
                     res = sh ( script: "docker logs test_tester_1",
                     returnStdout: true)
-                    println("${res}")
+                    echo "${res}"
                     // sh "docker run -d --name app --network ubuntu_default -p 8083:8080 toxictypoapp:1.0-SNAPSHOT "
                     
                     // sh "docker build -t testing-img ./src/test/" 
