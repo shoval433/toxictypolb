@@ -4,14 +4,13 @@ services:
     image: toxictypoapp:1.0-SNAPSHOT
     ports:
       - "8083:8080"
-    healthcheck: 
-      test: ['CMD', 'curl', 'localhost:8080']
-      interval: 3s
-      timeout: 3s
-      retries: 15 
+    # healthcheck: 
+    #   test: ['CMD', 'curl', 'localhost:8080']
+    #   interval: 3s
+    #   timeout: 3s
+    #   retries: 15 
   tester:
     build: .
     command: "app:8080 e2e 7"
     depends_on:
-      app:
-        condition: service_healthy 
+     - app
