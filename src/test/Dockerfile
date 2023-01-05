@@ -1,6 +1,6 @@
 FROM python:2.7
 
-ENV SRV localhost:8080
+ENV SRV app:8080
 
 ADD . .
 RUN pip install -r requirments.txt
