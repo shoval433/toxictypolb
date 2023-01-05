@@ -46,12 +46,21 @@ pipeline{
                     configFileProvider([configFile(fileId: 'my_settings.xml', variable: 'set')]) {
                     sh "mvn -s ${set} verify"
                     }
-                    sh "cd src/test && docker-compose up -d"
-                    echo "======================================================================================================================================================================"
-                    def res = sh ( script: "docker logs test_tester_1 | grep -i Failed",
-                    returnStdout: true) == 0
-                    echo "======================================================================================================================================================================"
-                    println(res) //"${res}"
+                    sh """
+                    cd src/test
+                    docker compose up -d app --build
+                    docker compose up tester --build
+
+                    check=0
+                    docker logs test-tester-1 | grep -i failures || { check=1; }
+
+                    if [ \$check = 0 ] 
+                    then
+                    echo "tests faild"
+                    exit 1
+                    fi
+                    """
+                    
 
 
                     // Server is set to app:8081
