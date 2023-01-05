@@ -12,5 +12,4 @@ services:
   tester:
     build: .
     command: "app:8081 e2e 7"
-    depends_on:
-     - app
+    
