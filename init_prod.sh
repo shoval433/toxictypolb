@@ -11,8 +11,8 @@ sleep 3
 
 # update the prod env
 docker stop prod && docker rm prod
-docker pull 644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi:latest
-docker run -d -p 80:8080 --name 644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi:latest
+docker pull 644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi:toxictypo-alb
+docker run -d -p 80:8080 --name 644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi:toxictypo-alb
 
 sleep 7
 
