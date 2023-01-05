@@ -11,6 +11,6 @@ services:
     #   retries: 15 
   tester:
     build: .
-    command: "app:8080 e2e 7"
+    command: "app:8081 e2e 7"
     depends_on:
      - app
