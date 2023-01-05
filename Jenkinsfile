@@ -48,7 +48,7 @@ pipeline{
                     }
                     sh "cd src/test && docker-compose up -d"
                     echo "======================================================================================================================================================================"
-                    res = sh ( script: "echo $(docker logs test_tester_1)",
+                    res = sh ( script: "docker logs test_tester_1 | grep 399",
                     returnStdout: true)
                     echo "${res}"
                     // sh "docker run -d --name app --network ubuntu_default -p 8083:8080 toxictypoapp:1.0-SNAPSHOT "
