@@ -80,23 +80,23 @@ pipeline{
                 }
             }
         }
-        // stage("is deploy to prod"){
-        //     when{
-        //         anyOf {
-        //                 branch "main"
-        //                 branch "master"
-        //         }
-        //     }
-        //     steps{
-        //         script{
-        //             sh "docker tag toxictypoapp:1.0-SNAPSHOT shoval_toxi:toxictypoapp"
-        //             docker.withRegistry("http://644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi", "ecr:eu-west-3:644435390668") {
-        //             docker.image("shoval_toxi:toxictypoapp").push()
-        //             }
-        //         }
-        //     } 
+        stage("is deploy to prod"){
+            when{
+                anyOf {
+                        branch "main"
+                        branch "master"
+                }
+            }
+            steps{
+                script{
+                    sh "docker tag toxictypoapp:1.0-SNAPSHOT shoval_toxi:toxictypo-alb"
+                    docker.withRegistry("http://644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi", "ecr:eu-west-3:644435390668") {
+                    docker.image("shoval_toxi:toxictypo-alb").push()
+                    }
+                }
+            } 
 
-        // }
+        }
         // stage("is main"){
         //     when{
         //         anyOf {
