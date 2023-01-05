@@ -80,7 +80,7 @@ pipeline{
                 }
             }
         }
-        stage("is deploy to prod"){
+        stage("deploy to ecr"){
             when{
                 anyOf {
                         branch "main"
@@ -97,25 +97,29 @@ pipeline{
             } 
 
         }
-        // stage("is main"){
-        //     when{
-        //         anyOf {
-        //                 branch "main"
-        //                 branch "master"
-        //         }
-        //     }
-        //     steps{
-        //         script{
-        //             sh """ 
-        //                 ssh ubuntu@43.0.10.85 "docker rm -f prod"
-        //                 ssh ubuntu@43.0.10.85 "aws ecr get-login-password --region eu-west-3 | docker login --username AWS --password-stdin 644435390668.dkr.ecr.eu-west-3.amazonaws.com"
-        //                 ssh ubuntu@43.0.10.85 "docker run -d --name prod -p 80:8080  644435390668.dkr.ecr.eu-west-3.amazonaws.com/shoval_toxi:toxictypoapp"
-        //             """
-        //             }
-               
-        //     } 
+        stage("Prod"){
+            when{
+                anyOf {
+                        branch "main"
+                        branch "master"
+                }
+            }
+            steps{
+                script{
+                    sh """ 
+                        scp init_prod.sh ubuntu@43.0.10.85:/home/ubuntu/
+                        ssh ubuntu@43.0.10.85 "bash init_prod.sh"
 
-        // }
+                        scp init_prod.sh ubuntu@43.0.20.244:/home/ubuntu/
+                        ssh ubuntu@43.0.20.244 "bash init_prod.sh"
+
+                        
+                    """
+                    }
+               
+            } 
+
+        }
 
     }
     post{
