@@ -48,8 +48,8 @@ pipeline{
                     }
                     sh """
                     cd src/test
-                    docker compose up -d app --build
-                    docker compose up tester --build
+                    docker-compose up -d app --build
+                    docker-compose up tester --build
 
                     check=0
                     docker logs test-tester-1 | grep -i failures || { check=1; }
