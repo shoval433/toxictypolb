@@ -47,7 +47,7 @@ pipeline{
                     sh "mvn -s ${set} verify"
                     }
                     echo "======================================================================================================================================================================"
-                    sh "cd src/test && docker-compose up"
+                    sh "cd src/test && docker-compose up -d"
                     
                     // sh "docker run -d --name app --network ubuntu_default -p 8083:8080 toxictypoapp:1.0-SNAPSHOT "
                     
