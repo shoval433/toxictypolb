@@ -128,10 +128,33 @@ pipeline{
             echo "========always========"
         }
         success{
-            echo "========pipeline executed successfully ========"
+           script{
+                script{
+                    emailext to: 'shoval123055@gmail.com',
+                    subject: 'Congratulations!', body: 'Well, this time you didnt mess up',  
+                    attachLog: true
+                }     
+            
+            
+                gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'my-repo' , jobCredentialId: ''),name: 'report'){
+                    echo "that good"
+                }
+            }
         }
         failure{
-            echo "========pipeline execution failed========"
+               script{
+                // emailext   recipientProviders: [culprits()],
+                // subject: 'YOU ARE BETTER THEN THAT !!! ', body: 'Dear programmer, you have broken the code, you are asked to immediately sit on the chair and leave the coffee corner.',  
+                // attachLog: true
+                emailext   to: 'shoval123055@gmail.com',
+                subject: 'YOU ARE BETTER THEN THAT !!! ', body: 'Dear programmer, you have broken the code, you are asked to immediately sit on the chair and leave the coffee corner.',  
+                attachLog: true
+            }      
+           
+            gitlabCommitStatus(connection: gitLabConnection(gitLabConnection: 'my-repo' , jobCredentialId: ''),name: 'report'){
+                echo "ahh"
+            }
+
         }
     }
 }
