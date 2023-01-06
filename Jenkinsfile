@@ -124,7 +124,7 @@ pipeline{
     }
     post{
         always{
-            sh "docker rm -f app "
+            sh "docker-compose down "
             echo "========always========"
         }
         success{
