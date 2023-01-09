@@ -1,4 +1,9 @@
-Welcome to the ToxicTypoLB project! This project is based on the ToxicTypoApp and includes an additional API at http://<server:port>/api/name. This API allows users to POST a form parameter called "name" to set the name, and GET the API to retrieve the last set name.
+toxictypolb
+===
+
+#### Welcome to the ToxicTypoLB project!
+
+This project is based on the ToxicTypoApp and includes an additional API at http://<server:port>/api/name. This API allows users to POST a form parameter called "name" to set the name, and GET the API to retrieve the last set name.
 
 The goal of this project is to exercise our use of AWS EC2, specifically the Load Balancer (ELB or ALB). We will use this app to create and configure two EC2 instances that are served by an ALB.
 
